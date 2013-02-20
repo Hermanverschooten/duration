@@ -8,7 +8,7 @@ http://matthewharris.org
 = Fork Authors
 Paul Gibler <paul.gibler@velir.com>
 Patrick Robertson <patrick.robertson@velir.com>
-http://velir.com
+Herman verschooten <Herman@verschooten.net>
 
 = Synopsis
 Duration objects are simple mechanisms that allow you to operate on durations
@@ -67,7 +67,7 @@ in Duration::UNITS or (the keys of) Duration::MULTIPLES.
 Here's an example of using the formerly mentioned solution:
     duration = Duration.new(Time.now)
     => #<Duration: 1981 weeks, 3 hours, 50 minutes and 44 seconds>
-    
+
 As you can see, it gave us the duration since the UNIX epoch.  This works fine
 because Time objects respond to the #to_i method.  And Time#to_i returns a
 UNIX timestamp (which is the number of seconds that have passed since the UNIX
@@ -83,7 +83,7 @@ mentioned.
 For example:
     duration = Duration.new(:hours => 12, :minutes => 58, :days => 14)
     => #<Duration: 2 weeks, 12 hours and 58 minutes>
-    
+
 So, it works.  But also notice that I gave it `:days => 14', but it spat out
 `2 weeks'.  Yes, Duration knows what it's doing.
 
@@ -102,7 +102,7 @@ Here's an example of how to format the known minutes in the duration:
     duration = Duration.since_epoch
     duration.format('%~m passed: %m')
     => "minutes passed: 4"
-    
+
 Now, this may look a bit tricky at first, but it's somewhat similar to the
 standard strftime() function you see in many lanuages, with the exception of the
 weird "%~m" type identifiers.  These identifiers are the correct terminology for
@@ -124,10 +124,10 @@ a duration by 2?
 
     duration = Duration.since_epoch
     => #<Duration: 1981 weeks, 4 hours, 12 minutes and 54 seconds>
-    
+
     duration / 2
     => #<Duration: 990 weeks, 3 days, 14 hours, 6 minutes and 27 seconds>
-    
+
 Pretty simple, right?
 
 === Magical Methods
@@ -140,13 +140,13 @@ The `round_<unit>_to_<unit>' method rounds the converted unit.
 
     Duration.since_epoch.weeks_to_days
     => 13867.0
-    
+
     Duration.since_epoch.round_weeks_to_days
     => 13867
-    
+
     Duration.since_epoch.weeks_to_days.round
     => 13867
-    
+
 = Feedback
 Well, I hope you learned a lot from the above explanations.  Time for you to get
 creative on your own now!

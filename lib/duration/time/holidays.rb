@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class Time
   module Holidays
     # Time object for this Christmas.

@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 # -*- coding: utf-8 -*-
 class Duration
   module Localizations
@@ -5,7 +6,7 @@ class Duration
     #
     # Thanks to Marcin Raczkowski for this localization.
     module Polish
-      LOCALE    = :polish
+      LOCALE    = :pl
       PLURALS   = %w(sekundy minuty godziny dni tygodni)
       SINGULARS = %w(sekunda minuta godzina dzień tydzień)
       FORMAT    = proc do |duration|

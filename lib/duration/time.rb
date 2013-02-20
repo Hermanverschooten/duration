@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 require 'duration/time/holidays'
 
 class Time

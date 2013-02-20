@@ -1,10 +1,11 @@
+# -*- encoding : utf-8 -*-
 class Duration
   module Localizations
     # Dutch localization
     #
     # Thanks to Siep Korteling for this localization.
     module Dutch
-      LOCALE    = :dutch
+      LOCALE    = :nl
       PLURALS   = %w(seconden minuten uren dagen weken)
       SINGULARS = %w(seconde minuut uur dag week)
       FORMAT    = proc do |duration|

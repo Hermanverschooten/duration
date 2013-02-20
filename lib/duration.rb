@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 require 'duration/version'
 require 'duration/numeric'
 require 'duration/time'

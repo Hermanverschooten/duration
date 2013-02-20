@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 # Additional methods added to numeric objects allow the developer to construct
 # a calculated number of seconds through human-readable methods.
 #

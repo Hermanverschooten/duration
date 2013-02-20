@@ -1,8 +1,9 @@
+# -*- encoding : utf-8 -*-
 class Duration
   module Localizations
     # English localization
     module English
-      LOCALE    = :english
+      LOCALE    = :en
       PLURALS   = %w(seconds minutes hours days weeks)
       SINGULARS = %w(second minute hour day week)
       FORMAT    = proc do |duration|

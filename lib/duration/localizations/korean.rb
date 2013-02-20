@@ -1,9 +1,10 @@
+# -*- encoding : utf-8 -*-
 # -*- coding: utf-8 -*-
 class Duration
   module Localizations
     # Korean localization
     module Korean
-      LOCALE    = :korean
+      LOCALE    = :ko
       PLURALS   = %w(초 분 시간 일 주)
       SINGULARS = %w(초 분 시간 일 주)
       FORMAT    = proc do |duration|

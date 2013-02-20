@@ -1,10 +1,11 @@
+# -*- encoding : utf-8 -*-
 class Duration
   module Localizations
     # French localization
     #
     # Thanks to Jean-François and Fred Senault for this localization.
     module French
-      LOCALE    = :french
+      LOCALE    = :fr
       PLURALS   = %w(secondes minutes heures jours semaines)
       SINGULARS = %w(seconde  minute  heure  jour  semaine )
       FORMAT    = proc do |duration|
