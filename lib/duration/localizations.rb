@@ -4,6 +4,7 @@ require 'duration/localizations/english'
 require 'duration/localizations/korean'
 require 'duration/localizations/french'
 require 'duration/localizations/dutch'
+require 'duration/localizations/german'
 require 'duration/localizations/polish'
 
 class Duration
