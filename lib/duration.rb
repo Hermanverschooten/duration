@@ -119,6 +119,7 @@ class Duration
   #   %m  => minutes
   #   %s  => seconds
   #   %t  => total seconds
+  #   %T  => total hours
   #   %H  => zero-padded hours
   #   %M  => zero-padded minutes
   #   %S  => zero-padded seconds
@@ -137,6 +138,7 @@ class Duration
       's'  => @seconds,
       't'  => @total,
       'D'  => total_days,
+      'T'  => total_hours,
       'H'  => @hours.to_s.rjust(2, '0'),
       'M'  => @minutes.to_s.rjust(2, '0'),
       'S'  => @seconds.to_s.rjust(2, '0'),
@@ -147,7 +149,7 @@ class Duration
       '~w' => @weeks   == 1 ? @@locale.singulars[4] : @@locale.plurals[4]
     }
 
-    format_str.gsub(/%?%(w|d|D|h|m|s|t|H|M|S|~(?:s|m|h|d|w))/) do |match|
+    format_str.gsub(/%?%(w|d|D|h|m|s|t|T|H|M|S|~(?:s|m|h|d|w))/) do |match|
       match['%%'] ? match : identifiers[match[1..-1]]
     end.gsub('%%', '%')
   end
@@ -215,6 +217,10 @@ class Duration
 
   def total_days
     7 * weeks + days
+  end
+
+  def total_hours
+    total_days * 24 + hours
   end
 
   alias_method :to_i, :total
