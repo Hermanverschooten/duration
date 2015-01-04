@@ -71,8 +71,8 @@ class Duration
     if args.kind_of?(Hash)
       @seconds = 0
       MULTIPLES.each do |unit, multiple|
-        unit = unit.to_sym
-        @seconds += args[unit] * multiple if args.key?(unit)
+	unit = unit.to_sym
+	@seconds += args[unit] * multiple if args.key?(unit)
       end
     else
       @seconds = args.to_i
@@ -86,23 +86,23 @@ class Duration
   # durations are in specific units.  This method is called internally, and
   # does not need to be called by user code.
   def calculate!
-		multiples = [MULTIPLES[:weeks], MULTIPLES[:days], MULTIPLES[:hours], MULTIPLES[:minutes], MULTIPLES[:seconds]]
-		units     = []
-		@total    = @seconds.to_f.round
-		multiples.inject(@total) do |total, multiple|
-		  # Divide into largest unit
-			units << total / multiple
-			total % multiple # The remainder will be divided as the next largest
-		end
+    multiples = [MULTIPLES[:weeks], MULTIPLES[:days], MULTIPLES[:hours], MULTIPLES[:minutes], MULTIPLES[:seconds]]
+    units     = []
+    @total    = @seconds.to_f.round
+    multiples.inject(@total) do |total, multiple|
+      # Divide into largest unit
+      units << total / multiple
+      total % multiple # The remainder will be divided as the next largest
+    end
 
-		# Gather the divided units
-		@weeks, @days, @hours, @minutes, @seconds = units
+    # Gather the divided units
+    @weeks, @days, @hours, @minutes, @seconds = units
   end
 
   # Compare this duration to another (or objects that respond to #to_i)
-	def <=>(other)
-		@total <=> other.to_i
-	end
+  def <=>(other)
+    @total <=> other.to_i
+  end
 
   # Convenient iterator for going through each duration unit from lowest to
   # highest.  (Goes from seconds...weeks)
@@ -135,6 +135,7 @@ class Duration
       'm'  => @minutes,
       's'  => @seconds,
       't'  => @total,
+      'D'  => total_days,
       'H'  => @hours.to_s.rjust(2, '0'),
       'M'  => @minutes.to_s.rjust(2, '0'),
       'S'  => @seconds.to_s.rjust(2, '0'),
@@ -145,9 +146,9 @@ class Duration
       '~w' => @weeks   == 1 ? @@locale.singulars[4] : @@locale.plurals[4]
     }
 
-		format_str.gsub(/%?%(w|d|h|m|s|t|H|M|S|~(?:s|m|h|d|w))/) do |match|
-			match['%%'] ? match : identifiers[match[1..-1]]
-		end.gsub('%%', '%')
+    format_str.gsub(/%?%(w|d|h|m|s|t|H|M|S|~(?:s|m|h|d|w))/) do |match|
+      match['%%'] ? match : identifiers[match[1..-1]]
+    end.gsub('%%', '%')
   end
 
   def method_missing(m, *args, &block)
@@ -167,29 +168,29 @@ class Duration
   end
 
   # Inspect Duration object.
-	def inspect
-		"#<#{self.class}: #{(s = to_s).empty? ? '...' : s}>"
-	end
+  def inspect
+    "#<#{self.class}: #{(s = to_s).empty? ? '...' : s}>"
+  end
 
-	def +(other)
-		Duration.new(@total + other.to_i)
-	end
+  def +(other)
+    Duration.new(@total + other.to_i)
+  end
 
-	def -(other)
-		Duration.new(@total - other.to_i)
-	end
+  def -(other)
+    Duration.new(@total - other.to_i)
+  end
 
-	def *(other)
-		Duration.new(@total * other.to_i)
-	end
+  def *(other)
+    Duration.new(@total * other.to_i)
+  end
 
-	def /(other)
-		Duration.new(@total / other.to_i)
-	end
+  def /(other)
+    Duration.new(@total / other.to_i)
+  end
 
-	def %(other)
-		Duration.new(@total % other.to_i)
-	end
+  def %(other)
+    Duration.new(@total % other.to_i)
+  end
 
   def seconds=(seconds)
     initialize :seconds => (@total + seconds) - @seconds
@@ -209,6 +210,10 @@ class Duration
 
   def weeks=(weeks)
     initialize :seconds => @total - weeks_to_seconds, :weeks => weeks
+  end
+
+  def total_days
+    7 * weeks + days
   end
 
   alias_method :to_i, :total
