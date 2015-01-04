@@ -114,6 +114,7 @@ class Duration
   #
   #   %w  => weeks
   #   %d  => days
+  #   %D  => total number of days
   #   %h  => hours
   #   %m  => minutes
   #   %s  => seconds
@@ -146,7 +147,7 @@ class Duration
       '~w' => @weeks   == 1 ? @@locale.singulars[4] : @@locale.plurals[4]
     }
 
-    format_str.gsub(/%?%(w|d|h|m|s|t|H|M|S|~(?:s|m|h|d|w))/) do |match|
+    format_str.gsub(/%?%(w|d|D|h|m|s|t|H|M|S|~(?:s|m|h|d|w))/) do |match|
       match['%%'] ? match : identifiers[match[1..-1]]
     end.gsub('%%', '%')
   end
